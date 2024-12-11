@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/*Header rules*/
+        
+header { 
+    display: flex; 
+    align-items: center; 
+    gap: 24px; 
+    background-color: white; 
+    position: sticky; 
+} 
+
+#logo, #logo-link { 
+    margin-right: auto; 
+    width: 200px; 
+} 
+
+#text-header, .text-header { 
+    font-size: 16px; 
+    text-decoration: none;
+    color: #f36805;
+    font-weight: 700;
+} 
+
+#text-header:hover, .text-header:hover { 
+    cursor: pointer; 
+    color: #c04a00;
+} 
+
+#country { 
+    width: 30px; 
+    aspect-ratio: 1/1; 
+    border-radius: 40px; 
+}

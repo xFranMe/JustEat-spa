@@ -1,0 +1,36 @@
+<!--Header-->
+<header class="content">
+	<a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo-white.png" alt="Just Eat Logo"></a>
+	<img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+</header>
+
+<!--Order dishes-->
+<section class="content">
+
+	<h2 data-ng-show="orderHandlerVM.functions.where('/resumeOrder') && orderHandlerVM.dishes.length !== 0">Resumen de tu pedido</h2>
+	<h2 data-ng-show="orderHandlerVM.functions.where('/resumeOrder') && orderHandlerVM.dishes.length === 0">Parece que aún no has añadido ningún plato a tu pedido.</h2>
+	<h2 data-ng-show="orderHandlerVM.functions.where('/listOrder/'+orderHandlerVM.order.id)">Resumen de tu pedido</h2>
+	
+    <div id="dishes-collection">
+       	<div class="card" data-ng-repeat="dish in orderHandlerVM.dishes">
+        	<div>
+            	<h3>{{dish.second.name}} ({{dish.third.name}})</h3>
+                <p>{{dish.second.description}}</p>
+                <p>{{dish.second.price}} €</p>
+                <p>{{dish.first.amount}} unidad/es</p>
+                <a data-ng-show="orderHandlerVM.functions.where('/resumeOrder')" data-ng-href="#!/deleteDishFromOrder/{{dish.second.id}}">Eliminar del pedido</a>
+            </div>
+            <div class="dish-picture">
+           		<img src="../img/dish-icon.png" alt="${dish.value.second.name}">
+            </div>
+    	</div>
+ 	</div>
+    
+    <p data-ng-show="orderHandlerVM.dishes.length !== 0" id="bill">Precio total del pedido: <span>{{orderHandlerVM.totalBill}} €</span></p>	            
+
+	<form data-ng-if="orderHandlerVM.functions.where('/resumeOrder') && orderHandlerVM.dishes.length !== 0"
+		  data-ng-submit="orderHandlerVM.functions.submitOrder()">
+		<input id="register-form-submit" type="submit" value="Realizar pedido">
+	</form>
+	
+</section>

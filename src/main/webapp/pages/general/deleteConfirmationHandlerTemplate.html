@@ -1,0 +1,29 @@
+<div class="delete-background content">
+	<div class="delete-form">
+	
+		<img data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteUser')" src="../img/user-logo.jpg" alt="Logo Usuario">
+		<img data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteRestaurant/'+deleteConfirmationHandlerVM.id)" src="../img/restaurant-logo.png" alt="Logo Restaurante">
+		<img data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDish/'+deleteConfirmationHandlerVM.id)" src="../img/dish-icon.png" alt="Logo Plato">
+		<img data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDishFromOrder/'+deleteConfirmationHandlerVM.id)" src="../img/dish-icon.png" alt="Logo Plato">
+		
+		<h1 data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteUser')">Eliminar usuario</h1>
+		<h1 data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteRestaurant/'+deleteConfirmationHandlerVM.id)">Eliminar restaurante</h1>
+		<h1 data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDish/'+deleteConfirmationHandlerVM.id)">Eliminar plato</h1>
+		<h1 data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDishFromOrder/'+deleteConfirmationHandlerVM.id)">Eliminar plato del pedido</h1>
+		
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteUser')">¿Eliminar permanentemente la cuenta asociada a {{deleteConfirmationHandlerVM.user.email}}?</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteRestaurant/'+deleteConfirmationHandlerVM.id)">¿Eliminar permanentemente el restaurante "{{deleteConfirmationHandlerVM.restaurant.name}}"?</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDish/'+deleteConfirmationHandlerVM.id)">¿Eliminar permanentemente el plato "{{deleteConfirmationHandlerVM.dish.name}}"?</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDishFromOrder/'+deleteConfirmationHandlerVM.id)">¿Desea eliminar el plato "{{deleteConfirmationHandlerVM.dish.name}}" del pedido?</p>
+				
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteUser')">Esta acción no podrá ser revertida y supondrá el borrado de todos los restaurantes creados por el usuario.</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteRestaurant/'+deleteConfirmationHandlerVM.id)">Esta acción no podrá ser revertida y supondrá el borrado de todos los platos y valoraciones del mismo.</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDish/'+deleteConfirmationHandlerVM.id)">Esta acción no podrá ser revertida.</p>
+		<p data-ng-show="deleteConfirmationHandlerVM.functions.where('/deleteDishFromOrder/'+deleteConfirmationHandlerVM.id)">Esta acción supondrá el borrado de todas sus unidades del pedido.</p>
+		
+		<form data-ng-submit="deleteConfirmationHandlerVM.functions.deleteConfirmationHandlerSwitcher()">
+			<input id="button" type="submit" value="Eliminar">
+		</form>
+		
+	</div>
+</div>

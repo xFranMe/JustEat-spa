@@ -1,0 +1,93 @@
+<!--Header-->
+<header class="content">
+    <div>
+    	<a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo-white.png" alt="Just Eat Logo"></a>
+     	<img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+    </div>
+</header>
+
+<!--Restaurant Edition Container-->
+<div class="content">
+
+	<!--Restaurant Info Form-->
+    <form name="restaurantForm" data-ng-submit="restaurantHandlerVM.functions.restaurantHandlerSwitcher()">
+       
+    	<fieldset class="box-shadow">
+           
+    		<p class="error-text" data-ng-repeat="error in restaurantHandlerVM.validationErrors">{{error}}</p>
+       
+            <legend data-ng-show="restaurantHandlerVM.functions.where('/insertRestaurant')">Crear restaurante</legend>         
+            <legend data-ng-show="restaurantHandlerVM.functions.where('/editRestaurant/'+restaurantHandlerVM.restaurant.id)">Editar "{{restaurantHandlerVM.restaurantFixedName}}"</legend>
+	  	
+            <label for="name">Nombre del restaurante</label>
+            <input type="text" id="name" name="name" placeholder="Nombre del restaurante" 
+            	   data-ng-model="restaurantHandlerVM.restaurant.name" required>
+           	<p class="validation-error" data-ng-show="restaurantForm.name.$error.required">Es necesario incluir un nombre para el restaurante</p>
+            
+            <label for="description">Descripción del restaurante</label>
+            <textarea data-ng-model="restaurantHandlerVM.restaurant.description" name="description" id="description" cols="10" rows="4" required></textarea>
+            <p class="validation-error" data-ng-show="restaurantForm.description.$error.required"> Es necesario incluir una descripción para el restaurante</p>
+            
+            <label for="address">Dirección</label>
+            <textarea data-ng-model="restaurantHandlerVM.restaurant.address" name="address" id="address" cols="10" rows="2" required></textarea>
+            <p  class="validation-error" data-ng-show="restaurantForm.address.$error.required">Es necesario incluir una dirección para el restaurante</p>
+            
+            <label for="city">Localidad</label>
+            <input data-ng-model="restaurantHandlerVM.restaurant.city" type="text" id="city" name="city" placeholder="Ej. Cáceres" data-ng-pattern="/^([a-zA-Z\u0080-\u024F]+(?:(\\. )|-| |'))*[a-zA-Z\u0080-\u024F]*$/" required>
+            <p class="validation-error" data-ng-show="restaurantForm.city.$error.pattern">El nombre de la localidad es incorrecto.</p>
+            <p class="validation-error" data-ng-show="restaurantForm.city.$error.required">Es necesario incluir una localidad para el restaurante</p>
+            
+            <label for="telephone">Teléfono</label>
+            <input data-ng-model="restaurantHandlerVM.restaurant.telephone" type="tel" name="telephone" id="telephone" placeholder="Ej. 923 942 532" data-ng-pattern="/^\d{9}$/" required>
+			<p class="validation-error" data-ng-show="restaurantForm.telephone.$error.pattern">El teléfono debe estar formado por 9 dígitos sin espacios.</p>
+            <p class="validation-error" data-ng-show="restaurantForm.telephone.$error.required">Es necesario incluir una teléfono de contacto para el restaurante</p>
+
+            <label for="contactEmail">Email</label>
+            <input data-ng-model="restaurantHandlerVM.restaurant.contactEmail" type="email" name="contactEmail" id="contactEmail" placeholder="example@domain.com" data-ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+            <p class="validation-error" data-ng-show="restaurantForm.contactEmail.$error.pattern">El formato de email debe ser de la siguiente forma: example@domain.com</p>
+            <p class="validation-error" data-ng-show="restaurantForm.contactEmail.$error.required">Es necesario incluir una dirección de correo electrónico para el restaurante</p>
+            
+            <label for="minPrice">Rango de precios - Precio mínimo</label>
+            <input data-ng-model="restaurantHandlerVM.restaurant.minPrice" type="number" min="0" max="1000000" step="0.01" name="minPrice" id="minPrice" data-ng-pattern="/^\d+(\.\d{1,2})?$/" data-ng-change="restaurantHandlerVM.functions.validatePriceRange()" required>			
+			<p class="validation-error" data-ng-show="restaurantForm.minPrice.$error.required">Es necesario incluir un precio mínimo para el restaurante</p>
+ 			<p class="validation-error" data-ng-show="restaurantForm.minPrice.$error.pattern">El valor del precio mínimo debe ser un número válido (mayor que 0) con un máximo de dos decimales</p>
+ 			<p class="validation-error" data-ng-show="restaurantForm.minPrice.$error.range">El valor del precio mínimo no puede ser mayor que el precio máximo</p>
+
+            <label for="maxPrice">Rango de precios - Precio máximo</label>
+            <input data-ng-model="restaurantHandlerVM.restaurant.maxPrice" type="number" min="0" max="1000000" step="0.01" name="maxPrice" id="maxPrice" data-ng-pattern="/^\d+(\.\d{1,2})?$/" data-ng-change="restaurantHandlerVM.functions.validatePriceRange()" required>            
+            <p class="validation-error" data-ng-show="restaurantForm.maxPrice.$error.required">Es necesario incluir un precio máximo para el restaurante</p>
+			<p class="validation-error" data-ng-show="restaurantForm.maxPrice.$error.pattern">El valor del precio máximo debe ser un número válido (mayor que 0)con un máximo de dos decimales</p>
+			<p class="validation-error" data-ng-show="restaurantForm.maxPrice.$error.range">El valor del precio máximo no puede ser menor que el precio mínimo</p>
+            
+            <p id="categories-text">Categorías</p>
+            <div>
+				<div class="category-container" data-ng-repeat="category in restaurantHandlerVM.allCategories">
+					<input type="checkbox" name="categories" value="{{category.id}}" id="{{category.id}}" 
+							data-ng-model="restaurantHandlerVM.selectedCategories[$index]" data-ng-true-value="{{category.id}}" data-ng-false-value="-1">
+	               	<label for="{{category.id}}">{{category.name}}</label>
+            	</div>
+            </div>
+            
+            <div id="bike-friendly-container" data-ng-value="restaurantHandlerVM.restaurant.bikeFriendly">
+                <p>Bike Friendly</p>
+                <input data-ng-model="restaurantHandlerVM.restaurant.bikeFriendly" type="radio" name="bikeFriendly" id="bike-friendly-yes" data-ng-value=1 required>
+                <label for="bike-friendly-yes">Sí</label>
+                <input data-ng-model="restaurantHandlerVM.restaurant.bikeFriendly" type="radio" name="bikeFriendly" id="bike-friendly-no" data-ng-value=0 required>
+                <label for="bike-friendly-no">No</label>
+                <p class="validation-error" data-ng-show="restaurantForm.bikeFriendly.$error.required"> Es necesario seleccionar una de las opciones</p>
+            </div>
+            
+            <div id="available-container" data-ng-value="restaurantHandlerVM.restaurant.available">
+                <p>Disponibilidad</p>
+                <input data-ng-model="restaurantHandlerVM.restaurant.available" type="radio" name="available" id="available-yes" data-ng-value=1 required>
+                <label for="available-yes">Acepta pedidos</label>
+                <input data-ng-model="restaurantHandlerVM.restaurant.available" type="radio" name="available" id="available-no" data-ng-value=0 required>
+                <label for="available-no">No acepta pedidos</label>
+                <p class="validation-error" data-ng-show="restaurantForm.available.$error.required">Es necesario seleccionar una de las opciones</p>
+            </div>
+            
+            <input data-ng-show="restaurantHandlerVM.functions.where('/insertRestaurant')" type="submit" value="Crear restaurante" data-ng-disabled="restaurantForm.$invalid">
+            <input data-ng-show="restaurantHandlerVM.functions.where('/editRestaurant/'+restaurantHandlerVM.restaurant.id)" type="submit" value="Confirmar cambios" data-ng-disabled="restaurantForm.$invalid">
+    	</fieldset>
+	</form>
+</div>

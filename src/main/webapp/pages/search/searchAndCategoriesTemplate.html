@@ -1,0 +1,58 @@
+<!--Header-->
+<header class="content box-shadow">
+    <img id="logo" src="../img/just-eat-logo.png" alt="Just Eat Logo">
+    <a class="text-header" href="#!/resumeOrder">Mi pedido</a>
+    <a class="text-header" href="#!/userProfile">Perfil</a>
+    <a class="text-header" href="../LogoutServlet.do">Cerrar sesión</a>
+    <img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+</header>
+
+<div>
+    <img id="background-img" src="../img/bg_hero-mid-veganuary.jpg" alt="Imagen de fondo">
+</div>
+
+<!--Search-->
+<div id="search-container">
+    <div id="search-box" class="box-shadow">
+        <h1>Pide lo que te pida el cuerpo</h1>
+        <p>Comida a domicilio online cerca de ti</p>
+        <form data-ng-submit="searchAndCategoriesVM.functions.submitForm()">
+        	<div>
+            	<input type="text" name="search" placeholder="ej. Calle Pizarro, Cáceres" data-ng-model="searchAndCategoriesVM.searchText">
+            	<input type="submit" value="Buscar restaurantes">
+            </div>
+            <p>Disponibilidad</p>
+            <input type="radio" name="available" id="available-all" data-ng-value=-1 data-ng-model="searchAndCategoriesVM.available" checked required>
+         	<label for="available-all">Todos</label>
+            <input type="radio" name="available" id="available-yes" data-ng-value=1 data-ng-model="searchAndCategoriesVM.available">
+	        <label for="available-yes">Acepta pedidos</label>
+	        <input type="radio" name="available" id="available-no" data-ng-value=0 data-ng-model="searchAndCategoriesVM.available">
+	        <label for="available-no">No acepta pedidos</label>
+	        
+	        <p>Orden por valoración</p>
+	        <input type="radio" name="grade" id="grade-higher-first" data-ng-value=0 data-ng-model="searchAndCategoriesVM.order" checked required>
+	        <label for="grade-higher-first">Mayor a menor</label>
+	           <input type="radio" name="grade" id="grade-lower-first" data-ng-value=1 data-ng-model="searchAndCategoriesVM.order">
+	        <label for="grade-lower-first">Menor a mayor</label>
+        </form>
+    </div>
+</div>
+
+<!--Categories-->
+<section class="content">
+    <h2>Tipos de cocina más populares</h2>
+    <p>Busca los restaurantes más populares de tu zona y haz tu pedido de comida a domicilio online.</p>
+    <div id="card-collection">
+        <a data-ng-repeat="category in searchAndCategoriesVM.categories" data-ng-href="#!/searchByCategory/{{category.id}}">
+            <div class="card box-shadow">
+                <div>
+                    <img src="../img/category-default-logo.png" alt="{{category.name}} Logo">
+                </div>
+                <p>{{category.name}}</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!--Footer-->
+<div data-ng-include="'general/footer.html'"></div>

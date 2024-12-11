@@ -1,0 +1,22 @@
+# Archivos de configuración de Eclipse
+.settings/
+.project
+.classpath
+
+# Archivos generados automáticamente
+build/
+*.class
+
+# Archivos específicos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de base de datos
+*.db
+
+# Archivos de logs
+*.log
+
+# Otros archivos innecesarios
+*.bak
+*.tmp

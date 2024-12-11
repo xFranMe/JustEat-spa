@@ -1,0 +1,28 @@
+<!--Header-->
+<header class="content">
+    <div>
+    	<a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo-white.png" alt="Just Eat Logo"></a>
+     	<img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+    </div>
+</header>
+
+<!--Add Review Container-->
+<div class="content">
+
+	<!--Review Form-->
+    <form data-ng-submit="insertReviewVM.functions.createReview()">
+    	<fieldset class="box-shadow">
+                      
+       		<legend>Completa tu reseña de {{insertReviewVM.restaurant.name}}</legend>
+	  	               
+            <label for="grade">Valoración</label>
+            <input data-ng-model="insertReviewVM.review.grade" type="number" min="1" max="5" step="1" name="grade" id="grade" required>
+            
+            <label for="comment">Comentario (opcional)</label>
+            <textarea data-ng-model="insertReviewVM.review.review" name="comment" id="comment" cols="10" rows="4"></textarea>
+            
+            <input type="submit" value="Publicar reseña">
+            
+        </fieldset>
+    </form>
+</div>

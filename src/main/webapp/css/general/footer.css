@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/*Contact footer rules*/
+
+#contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EFEDEA;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#app-resources  img {
+    width: 120px;
+    margin-right: 10px;
+}
+
+#social-networks img {
+    width: 30px;
+    margin-right: 14px;
+}
+
+#blog {
+    transform: rotate(40deg);
+}
+
+/*Pay methods footer rules*/
+
+#pay-methods {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 60px;
+    background-color: #f5f3f1;
+}
+
+#pay-methods img {
+    height: 30px;
+}
+
+#pay-methods #pay-certificate {
+    margin-right: auto;
+    height: 60px;
+}

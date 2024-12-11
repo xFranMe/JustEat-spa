@@ -1,0 +1,206 @@
+<!--Header-->
+<header class="content">
+    <div>
+    	<a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo.png" alt="Just Eat Logo"></a>
+     	<a class="text-header" href="#!/resumeOrder">Mi pedido</a>
+     	<a class="text-header" href="#!/userProfile">Perfil</a>
+     	<img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+	</div>
+</header>
+
+<!--Restaurant section-->
+<section id="main" class="content">
+	<!--Restaurant info-->
+    <div id="restaurant-info" class="box-shadow">
+        <img src="../img/restaurant-logo.png" alt="Logo Restaurante">
+        <h1>{{restaurantProfileVM.restaurant.name}}</h1>
+        <p>{{restaurantProfileVM.restaurant.description}}</p>                
+        <div>Categorías:</div>
+        <ul id="categories">
+			<li data-ng-repeat="category in restaurantProfileVM.categories">{{category.name}}</li>
+        </ul>
+        
+        <div>Valoración media:</div>
+        <p id="gradesAverage">{{restaurantProfileVM.restaurant.gradesAverage}}⭐</p>
+        
+        <div>Dirección:</div>
+        <p id="address">{{restaurantProfileVM.restaurant.address}}</p>
+        
+        <div>Localidad:</div>
+        <p id="city">{{restaurantProfileVM.restaurant.city}}</p>
+        
+        <div>Teléfono de contacto:</div>
+        <p id="telephone">{{restaurantProfileVM.restaurant.telephone}}</p>
+        
+        <div>Correo electrónico:</div>
+        <p id="email">{{restaurantProfileVM.restaurant.contactEmail}}</p>
+        
+        <div>Rango de precios:</div>
+        <span id="minPrice">{{restaurantProfileVM.restaurant.minPrice}}</span>
+        <span> - </span>
+        <span id="maxPrice">{{restaurantProfileVM.restaurant.maxPrice}}</span>
+        <span>€</span>
+        
+        <div>Bike Friendly:</div>
+        <p id="bike-friendly" data-ng-if="restaurantProfileVM.restaurant.bikeFriendly == 1">Sí</p>
+        <p id="bike-friendly" data-ng-if="restaurantProfileVM.restaurant.bikeFriendly == 0">No</p>
+        
+        <div>Disponibilidad:</div>
+        <p id="available" data-ng-if="restaurantProfileVM.restaurant.available == 1">Acepta pedidos</p>
+        <p id="available" data-ng-if="restaurantProfileVM.restaurant.available == 0">No acepta pedidos</p>
+             
+        <div data-ng-if="restaurantProfileVM.currentUser.id == restaurantProfileVM.restaurant.idu"><a data-ng-href="#!/editRestaurant/{{restaurantProfileVM.restaurant.id}}">Editar este restaurante</a></div>
+    	<div data-ng-if="restaurantProfileVM.currentUser.id == restaurantProfileVM.restaurant.idu"><a data-ng-href="#!/deleteRestaurant/{{restaurantProfileVM.restaurant.id}}">Eliminar este restaurante</a></div>
+    </div>
+    
+    <!--Reviews-->
+    <div id="reviews" class="box-shadow">
+    	<h2>Reseñas</h2>
+     		
+		<h4 data-ng-if="restaurantProfileVM.reviewed">Parece que ya has añadido una reseña a este restaurante.</h4>
+		<div data-ng-if="!restaurantProfileVM.reviewed"><a data-ng-href="#!/insertReview/{{restaurantProfileVM.restaurant.id}}">Añadir reseña</a></div>
+     		
+        <div id="reviews-collection">
+        	<div class="review-card" data-ng-repeat="review in restaurantProfileVM.reviews">
+            	<h3 class="review-user">{{review.second.name}}</h3><span>( {{review.first.grade}}⭐ )</span>
+				<p data-ng-if="review.first.review == ''">Este usuario no ha añadido ningún comentario.</p>
+				<p data-ng-if="review.first.review != ''">"{{review.first.review}}"</p>
+         	</div>
+    	</div>
+     </div>
+</section>
+
+<!--Menu dishes-->
+<section id="menu" class="content">
+     <h2>Menú</h2>
+     <div id="menu-edit-link" data-ng-if="restaurantProfileVM.currentUser.id == restaurantProfileVM.restaurant.idu">
+          <a data-ng-href="#!/insertDish/{{restaurantProfileVM.restaurant.id}}">Añadir nuevo plato</a>
+     </div>
+     <div id="dishes-collection">
+     	<div class="card" data-ng-repeat="dish in restaurantProfileVM.dishes">
+        	<div>
+            	<h3>{{dish.name}}</h3>
+                <p>{{dish.description}}</p>
+                <p>{{dish.price}} €</p>
+				<form data-ng-if="restaurantProfileVM.restaurant.available == 1" data-ng-submit="restaurantProfileVM.functions.addDishToOrder(dish.id, restaurantProfileVM.dishesAmounts[$index])">
+					<label for="amount{{dish.id}}">Cantidad: </label>
+					<input type="number" id="amount{{dish.id}}" name="amount" data-ng-value="{{restaurantProfileVM.dishesAmounts[$index] || restaurantProfileVM.defaultAmount}}" min="{{restaurantProfileVM.defaultAmount}}" max="100" data-ng-model="restaurantProfileVM.dishesAmounts[$index]">
+					<input type="submit" value="Añadir a pedido">
+				</form>
+				<h4 data-ng-if="restaurantProfileVM.restaurant.available == 0">Este plato no puede añadirse al pedido ya que el restaurante actualmente no acepta pedidos.</h4>
+                  
+                  
+       			<a data-ng-if="restaurantProfileVM.currentUser.id == restaurantProfileVM.restaurant.idu" data-ng-href="#!/editDish/{{dish.id}}">Editar plato</a>
+       			<a data-ng-if="restaurantProfileVM.currentUser.id == restaurantProfileVM.restaurant.idu" data-ng-href="#!/deleteDish/{{dish.id}}">Eliminar plato</a>
+              
+             </div>
+             <div class="dish-picture">
+             	<img src="../img/dish-icon.png" alt="{{dish.name}}">
+             </div>
+          </div> 
+      </div>
+</section>
+  
+<!-- AMPLIACIÓN 4 -->
+<!--Related restaurants-->
+ 
+ <h2>Restaurantes relacionados</h2>
+ 
+<!--Related restaurants: category-->
+<section class="content">
+	<h3>Restaurantes con categorías similares...</h3>
+    
+    <h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByCategory.length != 0">Si buscas el mismo tipo de comida, ¡no te pierdas las siguientes opciones!</h4>
+	<h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByCategory.length == 0">Parece que no hay más alternativas que se ajusten al tipo de comida ofrecida por este restaurante :(</h4>
+
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat="restaurant in restaurantProfileVM.relatedRestaurantsByCategory" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="{{restaurant.name}} Logo">
+               </div>
+               <div>
+                   <h3>{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+   
+<!--Related restaurants: city-->
+<section class="content">
+	<h3>Restaurantes en la misma ciudad...</h3>
+    
+    <h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByCity.length != 0">¿No quieres que la comida llegue fría? ¡Aquí te dejamos restaurantes localizados en la misma ciudad!</h4>
+	<h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByCity.length == 0">Lamentablemente no hay restaurantes localizados en esta misma localidad.</h4>
+
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat="restaurant in restaurantProfileVM.relatedRestaurantsByCity" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="{{restaurant.name}} Logo">
+               </div>
+               <div>
+                   <h3>{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+   
+<!--Related restaurants: price-->
+<section class="content">
+	<h3>Restaurantes con precios similares...</h3>
+    
+    <h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByPrice.length != 0">¿Presupuesto ajustado? No te pierdas las siguientes opciones por precios similares...</h4>
+	<h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByPrice.length == 0">Actualmente no existen restaurantes que ofrezcan productos con un rango de precio similar.</h4>
+
+	<div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat="restaurant in restaurantProfileVM.relatedRestaurantsByPrice" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="{{restaurant.name}} Logo">
+               </div>
+               <div>
+                   <h3>{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+   
+<!--Related restaurants: average grade-->
+<section class="content">
+	<h3>Restaurantes con una valoración similar...</h3>
+    
+    <h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByGrade.length != 0">¡A continuación te dejamos restaurantes con una valoración muy parecida!</h4>
+	<h4 data-ng-if="restaurantProfileVM.relatedRestaurantsByGrade.length == 0">Sorprendentemente no existen más alternativas con una valoración similar. ¡Prueba con otras opciones para descubrir restaurantes de calidad!</h4>
+
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat="restaurant in restaurantProfileVM.relatedRestaurantsByGrade" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="{{restaurant.name}} Logo">
+               </div>
+               <div>
+                   <h3>{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+        
+<!--Footer-->
+<div data-ng-include="'general/footer.html'"></div>

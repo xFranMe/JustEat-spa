@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/*Restaurants Section*/
+
+.restaurant-collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+h2 {
+	text-align: center;
+}
+
+#new-restaurant {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.restaurant-link {
+	flex-grow: 1;
+}
+
+.restaurant-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    border: solid 1px #888888;
+    border-radius: 20px;
+    color: black;
+    gap: 10px;
+}
+
+.restaurant-link {
+	flex-basis: 45%;
+}
+
+.restaurant-picture-box {
+    min-width: 10em;
+    aspect-ratio: 1/1;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.restaurant-card img {
+    width: 8em;
+}
+
+.restaurant-card p:last-of-type {
+    font-weight: 700;
+}
+
+span {
+	font-weight: normal;
+}
+
+h3 {
+	color: #a32c0b;
+}
+
+.description {
+	color: #3a3b3a;
+	font-weight: normal;
+}

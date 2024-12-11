@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+body {
+    background-color: #fcfcfc;
+}
+
+p {
+    font-size: 18px;
+}
+
+a {
+	color: black;
+}
+
+@media ( max-width: 1400px) { 
+    #search-container {margin-top: 12%}
+}
+
+@media ( max-width: 1000px) { 
+    input[type="submit"] {width: 100%; margin: 0.5em 0;}
+}
+
+/*Background image rules*/
+
+#background-img {
+    width: 100%;
+}
+
+/*Search box rules*/
+
+#search-container {
+    display: flex;
+    justify-content: center;
+    top: -29%;
+    margin-bottom: -14em;
+    position: relative;
+}   
+
+#search-box {
+    background-color: white;
+    width: 50%;
+    text-align: center;
+    border-radius: 20px;
+    padding: 50px 20px;
+}
+
+#search-box h1 {
+    color: #fb6101;
+    margin: 0;
+    font-size: 46px;
+}
+
+#search-box p {
+    color: #656157;
+}
+
+form > div {
+    border: solid 1px black;
+    border-radius: 40px;
+    padding: 4px 0px;
+    margin: 0 10%;
+    margin-bottom: 2%;
+}
+
+#search-box > a {
+	margin-right: 12px;
+}
+
+#search-box input {
+    font-size: 20px;
+    padding: 20px 0px;
+}
+
+#search-box input[type=text] {
+    width: 50%;
+    border-style: none;
+    border-radius: inherit;
+    padding-left: 4px;
+}
+
+#search-box input[type=text]:focus {
+    outline: none;
+}
+
+#search-box input[type=submit] {
+    background-color: #fb6101;
+    color: white;
+    border-style: none;
+    border-radius: inherit;
+    height: 100%;
+    padding-left: 4px;
+    padding-right: 4px;
+    float: right;
+    margin-right: 4px;
+}
+
+#search-box input[type=submit]:hover {
+    background-color: #c04a00;
+    cursor: pointer;
+}
+
+/*Categories section rules*/
+
+section {
+    background-color: #fcfcfc;
+}
+
+section h2 {
+    font-size: 38px;
+    margin: 0;
+}
+
+#card-collection {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.card {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    width: 10em;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+.card div {
+    flex-grow: 1;
+    background-color: #ff8001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.card img {
+    width: 75%;
+}
+
+.card p {
+    text-align: center;
+    background-color: white;
+    margin: 0;
+    padding: 14px;
+    word-wrap: break-word;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.card:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+body {
+    background-color: #f5f3f1;
+    display: block;
+}
+
+/*Header rules*/
+
+header {
+	display: block;
+    height: 60%;
+    background-color: #fb6101;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}

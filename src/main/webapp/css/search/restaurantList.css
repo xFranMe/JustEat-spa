@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+/*Header rules*/
+
+header { 
+    background-color:  #ff8001; 
+} 
+
+#profile {
+	color: white;
+}
+
+#profile:hover {
+	color: #79e9ed;
+}
+
+/*Search results*/
+
+h4 {
+	color: #4a4949;
+	font-style: italic;
+	font-weight: normal;
+}

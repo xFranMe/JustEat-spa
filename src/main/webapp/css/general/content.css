@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial,sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 0;    
+}
+
+/*Rules applied to different elements*/
+
+.content { 
+    padding: 20px 300px 24px; 
+}
+
+@media ( max-width: 1400px) { 
+    .content { padding: 4px 10px 6px; }
+}
+
+.box-shadow {
+    box-shadow: 0px 1px 10px #888888;
+}
+
+a {
+	text-decoration: none;
+    color: #fb6101;
+    font-weight: 600;
+}
+
+a:hover {
+	color: #c04a00;
+}
+
+section {
+	flex-grow: 1;
+}

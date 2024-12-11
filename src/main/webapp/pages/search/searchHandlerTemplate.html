@@ -1,0 +1,125 @@
+<!--Header-->
+<header class="content"> 
+    <a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo-white.png" alt="Just Eat Logo"></a>
+    <a id="profile" href="#!/userProfile">Perfil</a>
+    <img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">          
+</header>
+
+<!--Category results-->
+<section data-ng-if="searchHandlerVM.functions.where('/searchByCategory/'+searchHandlerVM.category.id)" class="content">
+	<h3>Restaurantes con la categoría {{searchHandlerVM.category.name}}</h3>
+    
+    <h4 data-ng-if="searchHandlerVM.restaurantsByCategory.length !== 0">¡Los siguientes restaurantes han sido encontrados!</h4>
+    <h4 data-ng-if="searchHandlerVM.restaurantsByCategory.length === 0">Lo sentimos, no se ha encontrado restaurantes con la categoría seleccionada.</h4>
+       
+    <div data-ng-if="searchHandlerVM.restaurantsByCategory.length !== 0" class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat="restaurant in searchHandlerVM.restaurantsByCategory" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="{{restaurant.name}} Logo">
+               </div>
+               <div>
+                   <h3 class="restaurant-name">{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+    
+</section>
+
+<!-- Main search results -->
+
+<!--Search results: only availability results (ordered)-->
+<section data-ng-if='searchHandlerVM.restaurantsByFilter.noSearchTextList != undefined' class="content">
+    <h3>Restaurantes encontrados</h3>
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat='restaurant in searchHandlerVM.restaurantsByFilter.noSearchTextList' data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="${restaurant.name} Logo">
+               </div>
+               <div>
+                   <h3 class="restaurant-name">{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+
+<!--Search results: restaurants by city or address-->
+<section class="content" data-ng-if="searchHandlerVM.restaurantsByFilter.noSearchTextList == undefined && !searchHandlerVM.functions.where('/searchByCategory/'+searchHandlerVM.category.id)">
+	<h3>Coincidencias por localidad o dirección</h3>
+    <h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listCityAddress.length != 0'>¡Las siguientes coincidencias han sido encontradas!</h4>
+	<h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listCityAddress.length == 0'>Lo sentimos, no se ha encontrado coincidencias por localidad o dirección.</h4>
+		
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat='restaurant in searchHandlerVM.restaurantsByFilter.listCityAddress' data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="${restaurant.name} Logo">
+               </div>
+               <div>
+                   <h3 class="restaurant-name">{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+   
+<!--Search results: restaurants by name-->
+<section class="content" data-ng-if="searchHandlerVM.restaurantsByFilter.noSearchTextList == undefined && !searchHandlerVM.functions.where('/searchByCategory/'+searchHandlerVM.category.id)">
+	<h3>Coincidencias por nombre de restaurante</h3>
+    <h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listName.length != 0'>¡Genial! Los siguientes restaurantes han sido encontrados.</h4>
+	<h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listName.length == 0'>Parece que no existe ningún restaurante cuyo nombre coincida con el criterio de búsqueda...</h4>
+		
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat='restaurant in searchHandlerVM.restaurantsByFilter.listName' data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="${restaurant.name} Logo">
+               </div>
+               <div>
+                   <h3 class="restaurant-name">{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+
+<!--Search results: restaurants by description-->
+<section class="content" data-ng-if="searchHandlerVM.restaurantsByFilter.noSearchTextList == undefined && !searchHandlerVM.functions.where('/searchByCategory/'+searchHandlerVM.category.id)">
+	<h3>Coincidencias por descripción de restaurante</h3>
+    <h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listDescription.length != 0'>Quizá las siguientes descripciones se ajusten al criterio de búsqueda...</h4>
+	<h4 data-ng-if='searchHandlerVM.restaurantsByFilter.listDescription.length == 0'>Vaya, aquí hay mucho vacío. Prueba a buscar por otra descripción la próxima vez.</h4>
+		
+    <div class="restaurant-collection">
+        <a class="restaurant-link" data-ng-repeat='restaurant in searchHandlerVM.restaurantsByFilter.listDescription' data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="${restaurant.name} Logo">
+               </div>
+               <div>
+                   <h3 class="restaurant-name">{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+    </div>
+</section>
+
+<!--Footer-->
+<div data-ng-include="'general/footer.html'"></div>

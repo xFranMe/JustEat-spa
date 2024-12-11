@@ -1,0 +1,65 @@
+<!--Header-->
+<header class="content">
+    <div>
+    	<a id="logo-link" href="#!/"><img id="logo" src="../img/just-eat-logo.png" alt="Just Eat Logo"></a>
+     	<a class="text-header" href="#!/resumeOrder">Mi pedido</a>
+     	<a class="text-header" href="../LogoutServlet.do">Cerrar sesión</a>
+     	<img id="country" src="../img/spanish-flag.png" alt="España" title="Región: España">
+	</div>
+</header>
+ 
+<!--Profile info-->
+<section id="main" class="content">
+    <div id="profile-info" class="box-shadow">
+        <img src="../img/user-logo.jpg" alt="Logo Perfil Usuario">
+        <h1>Perfil de {{userProfileVM.user.name}}</h1>
+        <div>Nombre:</div>
+        <p id="name">{{userProfileVM.user.name}}</p>
+        <div>Apellidos:</div>
+        <p id="surname">{{userProfileVM.user.surname}}</p>
+        <div>Dirección de correo electrónico:</div>
+        <p id="email">{{userProfileVM.user.email}}</p>
+        <div><a href="#!/editUser">Editar perfil</a></div>
+        <div><a href="#!/deleteUser">Eliminar cuenta</a></div>
+	</div>
+</section>
+
+<!--Restaurants-->
+<section class="content">
+	<h2>Mis restaurantes</h2>
+	<div id="new-restaurant">
+		<a href="#!/insertRestaurant">Crear nuevo restaurante</a>
+	</div>
+    
+    <div class="restaurant-collection">
+    
+    	<a class="restaurant-link" data-ng-repeat="restaurant in userProfileVM.restaurants" data-ng-href="#!/restaurantProfile/{{restaurant.id}}">
+     		<div class="restaurant-card box-shadow">  
+               <div class="restaurant-picture-box">
+                   <img src="../img/restaurant-logo.png" alt="${restaurant.name} Logo">
+               </div>
+               <div>
+                   <h3>{{restaurant.name}}</h3>
+                   <p class="description">{{restaurant.description}}</p>
+                   <p>Dirección: <span>{{restaurant.address}}</span> <span>({{restaurant.city}})</span></p>
+                   <p>Valoración media: <span>{{restaurant.gradesAverage}}</span>⭐</p> 
+               </div>        
+        	</div>
+       	</a>
+       	   	
+    </div>
+</section>
+
+<!-- Orders -->
+<section class="content">
+    <h2>Mis pedidos anteriores</h2>	
+	<h4 data-ng-if="userProfileVM.orders.length === 0">Todavía no se ha realizado ningún pedido.</h4>
+	<ul>
+		<li data-ng-repeat="order in userProfileVM.orders">
+			<p><span class="order-info">Código de pedido #{{order.id}}</span> </p>
+			<p><span class="order-info">Total pagado:</span> {{order.totalPrice}} €</p>
+			<a data-ng-href="#!/listOrder/{{order.id}}">Ver detalles</a>
+		</li>
+	</ul>
+     
+</section>

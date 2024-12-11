@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/*Forms rules*/
+
+body > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    top: -29%;
+    margin-bottom: -14em;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 12px;
+    background-color: white;
+    border-style: none;
+}
+
+legend {
+    color: #fb6101;
+    background-color: #f5f3f1;
+    font-size: 48px;
+    border: solid 4px #888888;
+    border-radius: 40px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+form {
+    flex-grow: 1;
+}
+
+input[type=submit] {
+    background-color: #fb6101;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    padding: 15px 55px;
+    font-size: 20px;
+    font-weight: 600;
+    align-self: center;
+    margin-top: 20px;
+}
+
+input[type=submit]:hover {
+    background-color: #c04a00;
+    cursor: pointer;
+}
+
+fieldset > label, p {
+    font-weight: 600;
+}
+
+p {
+    margin-top: 0;
+}
+
+.error-text {
+	color: red;
+}
